@@ -28,11 +28,6 @@ public class LoginController {
     @PostMapping("/login")
 	ResponseEntity<?> login(@RequestBody Usuario usuarioRequest , HttpServletResponse response) {
 
-		ResponseEntity<?> responseReturn = new ResponseEntity<>(null, HttpStatus.OK);
-
-		System.out.println(usuarioRequest.getUser_email());
-		System.out.println(Util.generateMD5(usuarioRequest.getUser_password()));
-		
 		List<Usuario> listUsuario = usuarioRepository.findUserByEmailAndPassword(usuarioRequest.getUser_email(), Util.generateMD5(usuarioRequest.getUser_password()));
 		
 		if(listUsuario.isEmpty()) {
@@ -42,6 +37,8 @@ public class LoginController {
 		Usuario usuarioEncontrado = listUsuario.get(0);
 		
 		response.setHeader("token", Util.generateMD5(usuarioRequest.getUser_email()));
+		
+		usuarioEncontrado.setUser_password(null);
 		
         return new ResponseEntity<>(listUsuario, HttpStatus.OK);
     }

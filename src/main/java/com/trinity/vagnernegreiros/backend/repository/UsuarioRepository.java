@@ -15,8 +15,7 @@ import com.trinity.vagnernegreiros.backend.model.Usuario;
 @Transactional
 public interface UsuarioRepository extends CrudRepository<Usuario, Long>{
 	
-	@Query("SELECT u FROM Usuario u WHERE u.email=:email")
-    List<Usuario> findUserByEmail(@Param("email") String email);
+	@Query("SELECT u FROM Usuario u WHERE u.user_email=:user_email and u.user_password=:user_password")
+    List<Usuario> findUserByEmailAndPassword(@Param("user_email") String user_email , @Param("user_password") String user_password );
 
 }
-

@@ -23,16 +23,20 @@ public class Usuario implements Serializable{
 	private Long id;
 	
 	@NotEmpty
-	@Size(min = 2, max = 50)
 	@Column(name="user_password")
-	private String password;
+	private String user_password;
 	
 	@NotEmpty
 	@Size(min = 2, max = 100)
 	@Column(name="user_email", unique=true)
-	private String email;
+	private String user_email;
 	
 	public Usuario() {}
+	
+	public Usuario(String user_email , String user_password) {
+		this.user_email = user_email;
+		this.user_password = user_password;
+	}
 
 	public Long getId() {
 		return id;
@@ -42,20 +46,20 @@ public class Usuario implements Serializable{
 		this.id = id;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getUser_password() {
+		return user_password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUser_password(String user_password) {
+		this.user_password = user_password;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getUser_email() {
+		return user_email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
 	}
 
 }
